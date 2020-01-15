@@ -17,8 +17,8 @@ void nodeRectangle::Draw(CClientDC * dc) { // Rectangle drawing
 	CPen pen;
 	pen.CreatePen(PS_SOLID, 2, borderColor);
 	dc->SelectObject(&pen);
-	dc->Rectangle(point.x - 20, point.y - 20,
-		point.x + 20, point.y + 20);
+	dc->Rectangle(point.x - SHAPE_AREA, point.y - SHAPE_AREA,
+		point.x + SHAPE_AREA, point.y + SHAPE_AREA);
 }
 
 IMPLEMENT_SERIAL(nodeRectangle, CObject, 1)
@@ -50,8 +50,8 @@ void nodeEllipse::Draw(CClientDC * dc) { // Ellipse drawing
 	CPen pen;
 	pen.CreatePen(PS_SOLID, 2, borderColor);
 	dc->SelectObject(&pen);
-	dc->Ellipse(point.x - 20, point.y - 20,
-		point.x + 20, point.y + 20);
+	dc->Ellipse(point.x - SHAPE_AREA, point.y - SHAPE_AREA,
+		point.x + SHAPE_AREA, point.y + SHAPE_AREA);
 }
 
 
@@ -81,9 +81,9 @@ nodeTriangle::nodeTriangle(CPoint p, COLORREF c) :Node(p, c) {
 void nodeTriangle::Draw(CClientDC * dc) { // triangle drawing
 	CPen pen;
 	CPoint arr[3];
-	arr[0] = CPoint(point.x - 20, point.y + 20);
-	arr[1] = CPoint(point.x + 20, point.y + 20);
-	arr[2] = CPoint(point.x, point.y - 20);
+	arr[0] = CPoint(point.x - SHAPE_AREA, point.y + SHAPE_AREA);
+	arr[1] = CPoint(point.x + SHAPE_AREA, point.y + SHAPE_AREA);
+	arr[2] = CPoint(point.x, point.y - SHAPE_AREA);
 	pen.CreatePen(PS_SOLID, 2, borderColor);
 	dc->SelectObject(&pen);
 	dc->Polygon(arr, 3);
@@ -96,10 +96,18 @@ double areaOfTriangle(int x1, int y1, int x2, int y2, int x3, int y3)
 }
 
 bool nodeTriangle::PtInShape(CPoint p) {
-	double triangleArea = areaOfTriangle(point.x, point.y - 20, point.x - 20, point.y + 20, point.x + 20, point.y + 20);
-	double PAB = areaOfTriangle(p.x, p.y, point.x, point.y - 20, point.x - 20, point.y + 20);
-	double PBC = areaOfTriangle(p.x, p.y, point.x - 20, point.y + 20, point.x + 20, point.y + 20);
-	double PAC = areaOfTriangle(p.x, p.y, point.x, point.y - 20, point.x + 20, point.y + 20);
+	double triangleArea = areaOfTriangle(point.x, point.y - SHAPE_AREA, 
+		point.x - SHAPE_AREA, point.y + SHAPE_AREA,
+		point.x + SHAPE_AREA, point.y + SHAPE_AREA);
+	double PAB = areaOfTriangle(p.x, p.y,
+		point.x, point.y - SHAPE_AREA,
+		point.x - SHAPE_AREA, point.y + SHAPE_AREA);
+	double PBC = areaOfTriangle(p.x, p.y,
+		point.x - SHAPE_AREA, point.y + SHAPE_AREA,
+		point.x + SHAPE_AREA, point.y + SHAPE_AREA);
+	double PAC = areaOfTriangle(p.x, p.y,
+		point.x, point.y - SHAPE_AREA,
+		point.x + SHAPE_AREA, point.y + SHAPE_AREA);
 
 	return triangleArea == PAB + PBC + PAC;
 }
