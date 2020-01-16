@@ -2,9 +2,11 @@
 #include "Node.h"
 using namespace std;
 
-// Node definitions 
- Node::Node(CPoint p, COLORREF c = RGB(255, 255, 255)) :point(p), borderColor(c) {
+int Node::count = 0;
 
+// Node definitions 
+ Node::Node(CPoint p, COLORREF c = RGB(255, 255, 255)) :point(p), borderColor(c) { 
+	 id = ++count;
 }
 
  // nodeRectangle definitions
@@ -26,10 +28,10 @@ void nodeRectangle::Serialize(CArchive &ar) {
 	CObject::Serialize(ar);
 	int type = 1;
 	if (ar.IsStoring()) {
-		ar << type << point << borderColor;
+		ar << type << point << borderColor << id;
 	}
 	else {
-		ar >> point >> borderColor;
+		ar >> point >> borderColor >> id;
 	}
 }
 
@@ -60,10 +62,10 @@ void nodeEllipse::Serialize(CArchive &ar) {
 	CObject::Serialize(ar);
 	int type = 0;
 	if (ar.IsStoring()) {
-		ar << type << point << borderColor;
+		ar << type << point << borderColor << id;
 	}
 	else {
-		ar >> point >> borderColor;
+		ar >> point >> borderColor >> id;
 	}
 }
 
@@ -117,9 +119,9 @@ void nodeTriangle::Serialize(CArchive& ar) {
 	CObject::Serialize(ar);
 	int type = 2;
 	if (ar.IsStoring()) {
-		ar << type << point << borderColor;
+		ar << type << point << borderColor << id;
 	}
 	else {
-		ar >> point >> borderColor;
+		ar >> point >> borderColor >> id;
 	}
 }

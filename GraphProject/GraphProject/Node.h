@@ -6,7 +6,8 @@ class Node :public CObject {
 public:
 	CPoint point;
 	COLORREF borderColor;
-	int nodeSize;
+	static int count;
+	int id;
 	Node(CPoint, COLORREF);
 	Node()  { }
 	virtual ~ Node()  {}
