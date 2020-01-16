@@ -59,7 +59,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="res\GraphProject.ico">
+    <Image Include="res\graphicon.ico">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

@@ -3,8 +3,6 @@
   GraphProjectDlg.cpp
   Node.cpp
   Generating code
-  448 of 453 functions (98.9%) were compiled, the rest were copied from previous compilation.
-    34 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+  All 476 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
   Finished generating code
   GraphProject.vcxproj -> C:\Users\USER\source\repos\GraphProject\GraphProject\x64\Release\GraphProject.exe
