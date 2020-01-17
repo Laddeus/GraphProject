@@ -15,7 +15,7 @@ nodeRectangle::nodeRectangle(CPoint p, COLORREF c) :Node(p, c) {
 }
 
 
-void nodeRectangle::Draw(CClientDC * dc) { // Rectangle drawing
+void nodeRectangle::Draw(CDC * dc) { // Rectangle drawing
 	CPen pen;
 	pen.CreatePen(PS_SOLID, 2, borderColor);
 	dc->SelectObject(&pen);
@@ -48,7 +48,7 @@ nodeEllipse::nodeEllipse(CPoint p, COLORREF c) :Node(p, c) {
 
 }
 
-void nodeEllipse::Draw(CClientDC * dc) { // Ellipse drawing
+void nodeEllipse::Draw(CDC * dc) { // Ellipse drawing
 	CPen pen;
 	pen.CreatePen(PS_SOLID, 2, borderColor);
 	dc->SelectObject(&pen);
@@ -80,7 +80,7 @@ nodeTriangle::nodeTriangle(CPoint p, COLORREF c) :Node(p, c) {
 
 }
 
-void nodeTriangle::Draw(CClientDC * dc) { // triangle drawing
+void nodeTriangle::Draw(CDC * dc) { // triangle drawing
 	CPen pen;
 	CPoint arr[3];
 	arr[0] = CPoint(point.x - SHAPE_AREA, point.y + SHAPE_AREA);

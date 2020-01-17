@@ -11,7 +11,7 @@ public:
 	Node(CPoint, COLORREF);
 	Node()  { }
 	virtual ~ Node()  {}
-	virtual void Draw(CClientDC *) = 0;
+	virtual void Draw(CDC *) = 0;
 	virtual void Serialize(CArchive &) = 0;
 	virtual bool PtInShape(CPoint) = 0;
 };
@@ -22,7 +22,7 @@ public:
 	nodeRectangle(CPoint, COLORREF);
 	nodeRectangle() { }
 	~nodeRectangle() { }
-	void Draw(CClientDC *);
+	void Draw(CDC *);
 	void Serialize(CArchive &);
 	bool PtInShape(CPoint);
 
@@ -36,7 +36,7 @@ public:
 	nodeEllipse() { }
 	~nodeEllipse() { }
 
-	void Draw(CClientDC *);
+	void Draw(CDC *);
 	void Serialize(CArchive&);
 	bool PtInShape(CPoint);
 };
@@ -49,7 +49,7 @@ public:
 
 	nodeTriangle() { }
 
-	void Draw(CClientDC *);
+	void Draw(CDC *);
 	void Serialize(CArchive&);
 	bool PtInShape(CPoint);
 };
