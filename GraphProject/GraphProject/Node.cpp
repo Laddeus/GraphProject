@@ -5,12 +5,12 @@ using namespace std;
 int Node::count = 0;
 
 // Node definitions 
- Node::Node(CPoint p, COLORREF c = RGB(255, 255, 255)) :point(p), borderColor(c) { 
+ Node::Node(const CPoint &p, const COLORREF &c = RGB(255, 255, 255)) :point(p), borderColor(c) { 
 	 id = ++count;
 }
 
  // nodeRectangle definitions
-nodeRectangle::nodeRectangle(CPoint p, COLORREF c) :Node(p, c) {
+nodeRectangle::nodeRectangle(const CPoint &p, const COLORREF &c) :Node(p, c) {
 
 }
 
@@ -35,7 +35,7 @@ void nodeRectangle::Serialize(CArchive &ar) {
 	}
 }
 
-bool nodeRectangle::PtInShape(CPoint p) {
+bool nodeRectangle::PtInShape(const CPoint &p) {
 	CRect rect;
 	rect.SetRect(point.x - SHAPE_AREA, point.y - SHAPE_AREA,
 		point.x + SHAPE_AREA, point.y + SHAPE_AREA);
@@ -44,7 +44,7 @@ bool nodeRectangle::PtInShape(CPoint p) {
 }
 
 // nodeEllipse definitions
-nodeEllipse::nodeEllipse(CPoint p, COLORREF c) :Node(p, c) {
+nodeEllipse::nodeEllipse(const CPoint &p, const COLORREF &c) :Node(p, c) {
 
 }
 
@@ -69,14 +69,14 @@ void nodeEllipse::Serialize(CArchive &ar) {
 	}
 }
 
-bool nodeEllipse::PtInShape(CPoint p) {
+bool nodeEllipse::PtInShape(const CPoint &p) {
 	double result = (p.x - point.x)*(p.x - point.x) + (p.y - point.y)*(p.y - point.y); // (x - a)^2 + (y - b)^2
 
 	return result <= (SHAPE_AREA*SHAPE_AREA); // if point if smaller than radious^2 then the point is inside of the circle 
 }
 
 // nodeTriangle definitions
-nodeTriangle::nodeTriangle(CPoint p, COLORREF c) :Node(p, c) {
+nodeTriangle::nodeTriangle(const CPoint &p, const COLORREF &c) :Node(p, c) {
 
 }
 
@@ -97,7 +97,7 @@ double areaOfTriangle(int x1, int y1, int x2, int y2, int x3, int y3)
 	return area > 0 ? area : (-1) * area;
 }
 
-bool nodeTriangle::PtInShape(CPoint p) {
+bool nodeTriangle::PtInShape(const CPoint &p) {
 	double triangleArea = areaOfTriangle(point.x, point.y - SHAPE_AREA, 
 		point.x - SHAPE_AREA, point.y + SHAPE_AREA,
 		point.x + SHAPE_AREA, point.y + SHAPE_AREA);

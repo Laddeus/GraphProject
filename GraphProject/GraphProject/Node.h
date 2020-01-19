@@ -8,50 +8,50 @@ public:
 	COLORREF borderColor;
 	static int count;
 	int id;
-	Node(CPoint, COLORREF);
+	Node(const CPoint &,const COLORREF &);
 	Node()  { }
 	virtual ~ Node()  {}
 	virtual void Draw(CDC *) = 0;
 	virtual void Serialize(CArchive &) = 0;
-	virtual bool PtInShape(CPoint) = 0;
+	virtual bool PtInShape(const CPoint &) = 0;
 };
 
 class nodeRectangle :public Node {
 	DECLARE_SERIAL(nodeRectangle)
 public:
-	nodeRectangle(CPoint, COLORREF);
+	nodeRectangle(const CPoint &, const COLORREF &);
 	nodeRectangle() { }
 	~nodeRectangle() { }
 	void Draw(CDC *);
 	void Serialize(CArchive &);
-	bool PtInShape(CPoint);
+	bool PtInShape(const CPoint &);
 
 };
 
 class nodeEllipse :public Node {
 	DECLARE_SERIAL(nodeEllipse)
 public:
-	nodeEllipse(CPoint, COLORREF);
+	nodeEllipse(const CPoint &, const COLORREF &);
 
 	nodeEllipse() { }
 	~nodeEllipse() { }
 
 	void Draw(CDC *);
 	void Serialize(CArchive&);
-	bool PtInShape(CPoint);
+	bool PtInShape(const CPoint &);
 };
 
 
 class nodeTriangle :public Node {
 	DECLARE_SERIAL(nodeTriangle)
 public:
-	nodeTriangle(CPoint, COLORREF);
+	nodeTriangle(const CPoint &, const COLORREF &);
 
 	nodeTriangle() { }
 
 	void Draw(CDC *);
 	void Serialize(CArchive&);
-	bool PtInShape(CPoint);
+	bool PtInShape(const CPoint &);
 };
 
 class Edge {
